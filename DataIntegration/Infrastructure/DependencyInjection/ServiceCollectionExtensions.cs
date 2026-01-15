@@ -21,9 +21,9 @@ namespace DataIntegration.Infrastructure.DependencyInjection
 
             s.AddSingleton<IMapper<DummyJsonProductDto, ProductPayload>, DummyJsonProductMapper>();
 
-            s.AddHttpClient<ProductsApiClient>(h => h.BaseAddress = new Uri(c["Api:BaseUrl"]!));
+            s.AddHttpClient<DataAccess.Api.ProductsApiClient>(h => h.BaseAddress = new Uri(c["Api:BaseUrl"]!));
 
-            s.AddSingleton<IApiClient<ProductPayload>, ProductsApiClient>();
+            s.AddSingleton<IApiClient<ProductPayload>, DataAccess.Api.ProductsApiClient>();
 
             s.AddSingleton<IDataSyncOrchestrator, DataSyncOrchestrator>();
             return s;
