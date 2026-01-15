@@ -1,1 +1,4 @@
-// placeholder
+namespace DataIntegration.DataSource.DummyJson.DTOs
+{ 
+
+}
