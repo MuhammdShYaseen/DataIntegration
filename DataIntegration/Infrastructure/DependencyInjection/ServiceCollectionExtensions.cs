@@ -6,6 +6,7 @@ using DataIntegration.Models.Abstractions;
 using DataIntegration.Models.Payloads;
 using DataIntegration.Services.Orchestration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Configuration;
 
 namespace DataIntegration.Infrastructure.DependencyInjection
 {
@@ -19,13 +20,10 @@ namespace DataIntegration.Infrastructure.DependencyInjection
             s.AddSingleton<IDataSource>(sp => sp.GetRequiredService<DummyJsonDataSource>());
 
             s.AddSingleton<IMapper<DummyJsonProductDto, ProductPayload>, DummyJsonProductMapper>();
-            s.AddSingleton<IMapper<DummyJsonCategoryDto, CategoryPayload>, DummyJsonCategoryMapper>();
 
             s.AddHttpClient<ProductsApiClient>(h => h.BaseAddress = new Uri(c["Api:BaseUrl"]!));
-            s.AddHttpClient<CategoriesApiClient>(h => h.BaseAddress = new Uri(c["Api:BaseUrl"]!));
 
             s.AddSingleton<IApiClient<ProductPayload>, ProductsApiClient>();
-            s.AddSingleton<IApiClient<CategoryPayload>, CategoriesApiClient>();
 
             s.AddSingleton<IDataSyncOrchestrator, DataSyncOrchestrator>();
             return s;
